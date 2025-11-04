@@ -11,7 +11,9 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-function getDoc()
+use Hexlet\Code\Parser;
+
+function getDoc(): string
 {
     return <<<DOC
 
@@ -32,3 +34,12 @@ DOC;
 
 $doc = getDoc();
 $args = Docopt::handle($doc, array('version'=>'1.0'));
+
+$firstFile = $args['<firstFile>'];
+$secondFile = $args['<secondFile>'];
+
+$parseFile1 = new Parser;
+$parseFile2 = new Parser;
+
+dump($parseFile1->parse($firstFile));
+dump($parseFile2->parse($secondFile));
