@@ -13,6 +13,7 @@ if (file_exists($autoloadPath1)) {
 
 use Hexlet\Code\Parser;
 
+
 function getDoc(): string
 {
     return <<<DOC
@@ -38,8 +39,7 @@ $args = Docopt::handle($doc, array('version'=>'1.0'));
 $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 
-$parseFile1 = new Parser;
-$parseFile2 = new Parser;
+//$diff = new Parser;
+//dump($diff->genDiff($firstFile , $secondFile));
 
-dump($parseFile1->parse($firstFile));
-dump($parseFile2->parse($secondFile));
+echo Parser::genDiff($firstFile, $secondFile);
