@@ -6,27 +6,21 @@ use function Funct\Collection\sortBy;
 
 class Parser
 {
-//    private $filePath;
-//
-//    public function __construct($filePath)
-//    {
-//        $this->filePath = $filePath;
-//    }
-    public function parse($filePath) : array
+    public function parse($filePath): array
     {
         if (file_exists($filePath)) {
             $absolutePath = realpath($filePath);
             $content = file_get_contents($absolutePath);
             $data = json_decode($content, true);
         } else {
-            $data = 'File not found';
+            $data = ['File not found'];
         }
         return $data;
     }
 
-    public static function genDiff($filePath1, $filePath2) : string
+    public static function genDiff($filePath1, $filePath2): string
     {
-        $parser = new Parser;
+        $parser = new Parser();
         $data1 = $parser->parse($filePath1);
         $data2 = $parser->parse($filePath2);
         $allKeys = array_unique(array_merge(array_keys($data1), array_keys($data2)));
@@ -53,10 +47,10 @@ class Parser
                 $result[] = "+ $key: {$parser->formatValue($data2[$key])}";
             }
         }
-        return "{\n" . implode("\n", $result) . "\n}";
+        return "{\r\n" . implode("\r\n", $result) . "\r\n}";
     }
 
-    function formatValue($value)
+    public function formatValue($value): string
     {
         if (is_bool($value)) {
             return $value ? 'true' : 'false';
@@ -66,5 +60,4 @@ class Parser
         }
         return $value;
     }
-
 }

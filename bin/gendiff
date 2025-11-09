@@ -39,7 +39,4 @@ $args = Docopt::handle($doc, array('version'=>'1.0'));
 $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 
-//$diff = new Parser;
-//dump($diff->genDiff($firstFile , $secondFile));
-
 echo Parser::genDiff($firstFile, $secondFile);
