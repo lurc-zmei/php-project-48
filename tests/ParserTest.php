@@ -1,15 +1,19 @@
 <?php
 
-use Hexlet\Code\Parser;
+use Hexlet\Code\Differ;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
 {
-    public function testGenDiff()
+
+
+    public function testFileJson()
     {
         $filePath = __DIR__ . "/fixtures/";
-        $firstFile = "{$filePath}file1.json";
-        $secondFile = "{$filePath}file2.json";
+        $firstFileJson = "{$filePath}file1.json";
+        $secondFileJson = "{$filePath}file2.json";
+        $firstFileYml = "{$filePath}file1.yml";
+        $secondFileYml = "{$filePath}file2.yml";
 
         $result = <<<DOC
         {
@@ -22,8 +26,9 @@ class ParserTest extends TestCase
         }
         DOC;
 
-        $this->assertEquals($result, Parser::genDiff($firstFile, $secondFile));
+        $differ = new Differ();
+        $this->assertEquals($result, $differ->genDiff($firstFileJson, $secondFileJson));
+        $this->assertEquals($result, $differ->genDiff($firstFileYml, $secondFileYml));
     }
-
 
 }

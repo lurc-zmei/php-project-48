@@ -11,7 +11,7 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use Hexlet\Code\Parser;
+use Hexlet\Code\Differ;
 
 
 function getDoc(): string
@@ -39,4 +39,5 @@ $args = Docopt::handle($doc, array('version'=>'1.0'));
 $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 
-echo Parser::genDiff($firstFile, $secondFile);
+$diff = new Differ();
+dump($diff->genDiff($firstFile, $secondFile));
