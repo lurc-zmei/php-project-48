@@ -2,17 +2,25 @@
 
 namespace Hexlet\Code;
 
+use Exception;
+
 class GetData
 {
+    /**
+     * @throws Exception
+     */
     public static function getContent($filePath): array|false|string
     {
         if (file_exists($filePath)) {
             $absolutePath = realpath($filePath);
             $content = file_get_contents($absolutePath);
+            if ($content === false) {
+                throw new Exception("Cannot read file: {$filePath}");
+            }
+            return $content;
         } else {
-            $content = ['File not found'];
+            throw new Exception("File not found: {$filePath}");
         }
-        return $content;
     }
 
     public static function getExtension(string $filePath): string
