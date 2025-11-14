@@ -40,7 +40,6 @@ class Differ
                 $result[$key] = ['type' => 'removed', 'value' => $data1[$key]]; //
             }
 
-
             if (array_key_exists($key, $data1) && array_key_exists($key, $data2)) {
                 if (is_array($data1[$key]) && is_array($data2[$key])) {
                     $result[$key] = ['type' => 'nested', 'children' => $this->buildDiff($data1[$key], $data2[$key])];

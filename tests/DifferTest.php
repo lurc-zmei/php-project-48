@@ -18,6 +18,7 @@ class DifferTest extends TestCase
         $secondFileYml = "{$filePath}file2.yml";
         $stylishExpected = "{$filePath}stylish-expected";
         $plainExpected = "{$filePath}plain-expected";
+        $jsonExpected = "{$filePath}json-expected";
 
         $differ = new Differ();
         $this->assertEquals(GetData::getContent($stylishExpected), $differ->genDiff($firstFileJson, $secondFileJson));
@@ -25,6 +26,9 @@ class DifferTest extends TestCase
 
         $this->assertEquals(GetData::getContent($plainExpected), $differ->genDiff($firstFileJson, $secondFileJson, 'plain'));
         $this->assertEquals(GetData::getContent($plainExpected), $differ->genDiff($firstFileYml, $secondFileYml, 'plain'));
+
+        $this->assertEquals(GetData::getContent($jsonExpected), $differ->genDiff($firstFileJson, $secondFileJson, 'json'));
+        $this->assertEquals(GetData::getContent($jsonExpected), $differ->genDiff($firstFileYml, $secondFileYml, 'json'));
     }
 
 }
