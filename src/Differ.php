@@ -2,10 +2,15 @@
 
 namespace Hexlet\Code;
 
+use Exception;
+
 use function Funct\Collection\sortBy;
 
 class Differ
 {
+    /**
+     * @throws Exception
+     */
     public function genDiff($firstFile, $secondFile, string $format = 'stylish'): string
     {
         $data1 = Parser::parse(GetData::getExtension($firstFile), GetData::getContent($firstFile));
@@ -13,10 +18,10 @@ class Differ
 
         $diff = $this->buildDiff($data1, $data2);
 
-        return Formatter::formatDiff($diff);
+        return Formatter::format($diff, $format);
     }
 
-    private function buildDiff($data1, $data2)
+    private function buildDiff($data1, $data2): array
     {
         $allKeys = array_unique(array_merge(array_keys($data1), array_keys($data2)));
 
@@ -46,7 +51,6 @@ class Differ
                 }
             }
         }
-
         return $result;
     }
 }

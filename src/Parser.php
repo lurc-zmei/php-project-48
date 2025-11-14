@@ -14,12 +14,12 @@ class Parser
         };
     }
 
-    public static function jsonFileParse(string $fileContent)
+    private static function jsonFileParse(string $fileContent)
     {
         return json_decode($fileContent, true);
     }
 
-    public static function ymlFileParse(string $fileContent)
+    private static function ymlFileParse(string $fileContent)
     {
         return YAML::parse($fileContent);
     }

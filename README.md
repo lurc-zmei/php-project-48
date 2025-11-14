@@ -1,6 +1,9 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/lurc-zmei/php-project-48/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/lurc-zmei/php-project-48/actions)
 
+### Gengiff CI tests and linter status:
+[![Gendiff CI](https://github.com/lurc-zmei/php-project-48/actions/workflows/gendiff-ci.yml/badge.svg)](https://github.com/lurc-zmei/php-project-48/actions/workflows/gendiff-ci.yml)
+
 ### SonarQube:
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=lurc-zmei_php-project-48&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=lurc-zmei_php-project-48)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lurc-zmei_php-project-48&metric=bugs)](https://sonarcloud.io/summary/new_code?id=lurc-zmei_php-project-48)
