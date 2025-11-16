@@ -13,3 +13,23 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=lurc-zmei_php-project-48&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=lurc-zmei_php-project-48)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=lurc-zmei_php-project-48&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=lurc-zmei_php-project-48)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lurc-zmei_php-project-48&metric=coverage)](https://sonarcloud.io/summary/new_code?id=lurc-zmei_php-project-48)
+
+# Gendiff
+program takes two files and finds the differences between them
+- support for different input formats: yaml and json
+- report generation in the plain, json and default stylish formats
+
+## Install dependencies
+`make install`
+
+## Getting help
+`gendiff --help`
+
+## Testing
+`make test`
+
+## Linting
+`make lint`
+
+##
+[![asciicast](https://asciinema.org/a/zD8Lawx4AMuSPx1XXqBtIkOrq.svg)](https://asciinema.org/a/zD8Lawx4AMuSPx1XXqBtIkOrq)
