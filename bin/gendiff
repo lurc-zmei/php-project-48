@@ -40,5 +40,4 @@ $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 $format = $args['--format'] ?? 'stylish';
 
-$diff = new Differ();
-echo $diff->genDiff($firstFile, $secondFile, $format);
+echo Differ::genDiff($firstFile, $secondFile, $format);

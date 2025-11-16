@@ -11,17 +11,17 @@ class Differ
     /**
      * @throws Exception
      */
-    public function genDiff($firstFile, $secondFile, string $format = 'stylish'): string
+    public static function genDiff($firstFile, $secondFile, string $format = 'stylish'): string
     {
         $data1 = Parser::parse(GetData::getExtension($firstFile), GetData::getContent($firstFile));
         $data2 = Parser::parse(GetData::getExtension($secondFile), GetData::getContent($secondFile));
 
-        $diff = $this->buildDiff($data1, $data2);
+        $diff = self::buildDiff($data1, $data2);
 
         return Formatter::format($diff, $format);
     }
 
-    private function buildDiff($data1, $data2): array
+    private static function buildDiff($data1, $data2): array
     {
         $allKeys = array_unique(array_merge(array_keys($data1), array_keys($data2)));
 
@@ -42,7 +42,7 @@ class Differ
 
             if (array_key_exists($key, $data1) && array_key_exists($key, $data2)) {
                 if (is_array($data1[$key]) && is_array($data2[$key])) {
-                    $result[$key] = ['type' => 'nested', 'children' => $this->buildDiff($data1[$key], $data2[$key])];
+                    $result[$key] = ['type' => 'nested', 'children' => self::buildDiff($data1[$key], $data2[$key])];
                 } elseif (($data1[$key] === $data2[$key])) {
                     $result[$key] = ['type' => 'unchanged', 'value' => $data1[$key]]; //
                 } else {
