@@ -11,7 +11,7 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use Hexlet\Code\Differ;
+use Differ\Differ\Differ;
 
 
 function getDoc(): string

@@ -1,7 +1,7 @@
 <?php
 
-use Hexlet\Code\Differ;
-use Hexlet\Code\GetData;
+use Differ\Differ\Differ;
+use Differ\Differ\GetData;
 use PHPUnit\Framework\TestCase;
 
 class DifferTest extends TestCase
