@@ -12,7 +12,7 @@ class Differ
      * @throws Exception
      */
 
-    public function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
+    public function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string|false
     {
         $data = new GetData();
         $data1 = $data->getFileData($firstFile);
