@@ -20,8 +20,7 @@ class GetData
     public function getContent(string $filePath): string
     {
         if (file_exists($filePath)) {
-            $absolutePath = realpath($filePath);
-            $content = file_get_contents($absolutePath);
+            $content = file_get_contents($filePath);
             if ($content === false) {
                 throw new Exception("Cannot read file: {$filePath}");
             }
