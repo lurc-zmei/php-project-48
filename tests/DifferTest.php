@@ -1,5 +1,7 @@
 <?php
 
+namespace Differ\Differ\tests;
+
 use Differ\Differ\Differ;
 use Differ\Differ\GetData;
 use PHPUnit\Framework\TestCase;
@@ -21,14 +23,15 @@ class DifferTest extends TestCase
         $jsonExpected = "{$filePath}json-expected";
 
         $differ = new Differ();
-        $this->assertEquals(GetData::getContent($stylishExpected), $differ->genDiff($firstFileJson, $secondFileJson));
-        $this->assertEquals(GetData::getContent($stylishExpected), $differ->genDiff($firstFileYml, $secondFileYml));
+        $data = new GetData();
 
-        $this->assertEquals(GetData::getContent($plainExpected), $differ->genDiff($firstFileJson, $secondFileJson, 'plain'));
-        $this->assertEquals(GetData::getContent($plainExpected), $differ->genDiff($firstFileYml, $secondFileYml, 'plain'));
+        $this->assertEquals($data->getContent($stylishExpected), $differ->genDiff($firstFileJson, $secondFileJson));
+        $this->assertEquals($data->getContent($stylishExpected), $differ->genDiff($firstFileYml, $secondFileYml));
 
-        $this->assertEquals(GetData::getContent($jsonExpected), $differ->genDiff($firstFileJson, $secondFileJson, 'json'));
-        $this->assertEquals(GetData::getContent($jsonExpected), $differ->genDiff($firstFileYml, $secondFileYml, 'json'));
+        $this->assertEquals($data->getContent($plainExpected), $differ->genDiff($firstFileJson, $secondFileJson, 'plain'));
+        $this->assertEquals($data->getContent($plainExpected), $differ->genDiff($firstFileYml, $secondFileYml, 'plain'));
+
+        $this->assertEquals($data->getContent($jsonExpected), $differ->genDiff($firstFileJson, $secondFileJson, 'json'));
+        $this->assertEquals($data->getContent($jsonExpected), $differ->genDiff($firstFileYml, $secondFileYml, 'json'));
     }
-
 }

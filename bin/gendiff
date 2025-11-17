@@ -2,6 +2,8 @@
 
 <?php
 
+use function Differ\Differ\genDiff;
+
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
 $autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
 
@@ -10,8 +12,6 @@ if (file_exists($autoloadPath1)) {
 } else {
     require_once $autoloadPath2;
 }
-
-use Differ\Differ\Differ;
 
 
 function getDoc(): string
@@ -40,4 +40,4 @@ $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 $format = $args['--format'] ?? 'stylish';
 
-echo Differ::genDiff($firstFile, $secondFile, $format);
+echo genDiff($firstFile, $secondFile, $format);

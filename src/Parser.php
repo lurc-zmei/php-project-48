@@ -6,7 +6,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class Parser
 {
-    public static function parse(string $fileFormat, $fileContent)
+    public static function parse($fileContent, string $fileFormat)
     {
         return match ($fileFormat) {
             'json' => self::jsonFileParse($fileContent),

@@ -6,10 +6,18 @@ use Exception;
 
 class GetData
 {
+    public function getFileData($file): array
+    {
+        $fileContent = $this->getContent($file);
+        $fileExtension = $this->getExtension($file);
+
+        return Parser::parse($fileContent, $fileExtension);
+    }
+
     /**
      * @throws Exception
      */
-    public static function getContent($filePath): array|false|string
+    public function getContent($filePath): array|false|string
     {
         if (file_exists($filePath)) {
             $absolutePath = realpath($filePath);
@@ -23,7 +31,7 @@ class GetData
         }
     }
 
-    public static function getExtension(string $filePath): string
+    private function getExtension(string $filePath): string
     {
         return pathinfo($filePath, PATHINFO_EXTENSION);
     }
