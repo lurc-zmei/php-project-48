@@ -3,7 +3,7 @@
 namespace Differ\Differ;
 
 /**
- * @throws /Exception
+ * @throws \Exception
  */
 function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
 {

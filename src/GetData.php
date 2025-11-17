@@ -6,7 +6,7 @@ use Exception;
 
 class GetData
 {
-    public function getFileData($file): array
+    public function getFileData(string $file): array
     {
         $fileContent = $this->getContent($file);
         $fileExtension = $this->getExtension($file);

@@ -42,7 +42,7 @@ class Plain
         return implode("\n", $lines);
     }
 
-    private static function toString($value): string
+    private static function toString(mixed $value): string
     {
         return match (true) {
             is_array($value) => '[complex value]',

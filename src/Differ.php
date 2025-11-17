@@ -12,7 +12,7 @@ class Differ
      * @throws Exception
      */
 
-    public function genDiff($firstFile, $secondFile, string $format = 'stylish'): string
+    public function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
     {
         $data = new GetData();
         $data1 = $data->getFileData($firstFile);
@@ -23,7 +23,7 @@ class Differ
         return Formatter::format($diff, $format);
     }
 
-    private function buildDiff($data1, $data2): array
+    private function buildDiff(array $data1, array $data2): array
     {
         $allKeys = array_unique(array_merge(array_keys($data1), array_keys($data2)));
 

@@ -4,7 +4,7 @@ namespace Differ\Differ\Formatters;
 
 class Stylish
 {
-    public static function stylish($data, $depth = 1): string
+    public static function stylish(array $data, int $depth = 1): string
     {
         $iter = function ($currValue, $currDepth) use (&$iter) {
             $spacesCount = 4;
@@ -60,7 +60,7 @@ class Stylish
         return $iter($data, $depth);
     }
 
-    private static function formatValue($value, callable $iter, int $depth): string
+    private static function formatValue(mixed $value, callable $iter, int $depth): string
     {
         if (is_array($value) && !isset($value['type'])) {
             // Это обычный массив (не узел diff), форматируем рекурсивно
@@ -69,7 +69,7 @@ class Stylish
         return self::toString($value);
     }
 
-    private static function toString($value): string
+    private static function toString(mixed $value): string
     {
         return match (true) {
             is_bool($value) => $value ? 'true' : 'false',
