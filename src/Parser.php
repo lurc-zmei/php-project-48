@@ -6,20 +6,21 @@ use Symfony\Component\Yaml\Yaml;
 
 class Parser
 {
-    public static function parse($fileContent, string $fileFormat)
+    public static function parse($fileContent, string $fileFormat): array
     {
         return match ($fileFormat) {
             'json' => self::jsonFileParse($fileContent),
-            'yml', 'yaml' => self::ymlFileParse($fileContent)
+            'yml', 'yaml' => self::ymlFileParse($fileContent),
+            default => throw new Exception("Unsupported file type: {$fileType}")
         };
     }
 
-    private static function jsonFileParse(string $fileContent)
+    private static function jsonFileParse(string $fileContent): array
     {
         return json_decode($fileContent, true);
     }
 
-    private static function ymlFileParse(string $fileContent)
+    private static function ymlFileParse(string $fileContent): array
     {
         return YAML::parse($fileContent);
     }

@@ -17,7 +17,7 @@ class GetData
     /**
      * @throws Exception
      */
-    public function getContent($filePath): array|false|string
+    public function getContent(string $filePath): string
     {
         if (file_exists($filePath)) {
             $absolutePath = realpath($filePath);
