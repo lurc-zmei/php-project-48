@@ -2,7 +2,6 @@
 
 namespace Differ\Differ\tests;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use function Differ\Differ\genDiff;
 

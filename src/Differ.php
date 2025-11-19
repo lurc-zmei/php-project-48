@@ -34,38 +34,35 @@ class Differ
         $result = [];
 
         foreach ($sortedKeys as $key) {
-            if (!array_key_exists($key, $data1) && array_key_exists($key, $data2)) {
-                    $result[$key] = [
-                        'type' => 'added',
-                        'value' => $data2[$key]
-                    ];
-            }
+            $value1 = $data1[$key] ?? null;
+            $value2 = $data2[$key] ?? null;
 
-            if (array_key_exists($key, $data1) && !array_key_exists($key, $data2)) {
+            if (!array_key_exists($key, $data1)) {
+                $result[$key] = [
+                    'type' => 'added',
+                    'value' => $value2
+                ];
+            } elseif (!array_key_exists($key, $data2)) {
                 $result[$key] = [
                     'type' => 'removed',
-                    'value' => $data1[$key]
+                    'value' => $value1
                 ];
-            }
-
-            if (array_key_exists($key, $data1) && array_key_exists($key, $data2)) {
-                if (is_array($data1[$key]) && is_array($data2[$key])) {
-                    $result[$key] = [
-                        'type' => 'nested',
-                        'children' => $this->buildDiff($data1[$key], $data2[$key])
-                    ];
-                } elseif (($data1[$key] === $data2[$key])) {
-                    $result[$key] = [
-                        'type' => 'unchanged',
-                        'value' => $data1[$key]
-                    ];
-                } else {
-                    $result[$key] = [
-                        'type' => 'changed',
-                        'oldValue' => $data1[$key],
-                        'newValue' => $data2[$key]
-                    ];
-                }
+            } elseif (is_array($value1) && is_array($value2)) {
+                $result[$key] = [
+                    'type' => 'nested',
+                    'children' => $this->buildDiff($value1, $value2)
+                ];
+            } elseif ($value1 === $value2) {
+                $result[$key] = [
+                    'type' => 'unchanged',
+                    'value' => $value1
+                ];
+            } else {
+                $result[$key] = [
+                    'type' => 'changed',
+                    'oldValue' => $value1,
+                    'newValue' => $value2
+                ];
             }
         }
         return $result;
