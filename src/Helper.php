@@ -7,7 +7,7 @@ use Exception;
 /**
  * @throws Exception
  */
-function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string|false
+function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
 {
     $differ = new Differ();
     return $differ->genDiff($firstFile, $secondFile, $format);
