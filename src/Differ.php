@@ -12,11 +12,13 @@ class Differ
      * @throws Exception
      */
 
-    public function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string|false
+    public function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
     {
-        $data = new GetData();
-        $data1 = $data->getFileData($firstFile);
-        $data2 = $data->getFileData($secondFile);
+        $fileData1 = new GetData($firstFile);
+        $fileData2 = new GetData($secondFile);
+
+        $data1 = Parser::parse($fileData1->content, $fileData1->extension);
+        $data2 = Parser::parse($fileData2->content, $fileData2->extension);
 
         $diff = $this->buildDiff($data1, $data2);
 

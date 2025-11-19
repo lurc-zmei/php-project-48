@@ -6,18 +6,19 @@ use Exception;
 
 class GetData
 {
-    public function getFileData(string $file): array
-    {
-        $fileContent = $this->getContent($file);
-        $fileExtension = $this->getExtension($file);
+    public string $content;
+    public string $extension;
 
-        return Parser::parse($fileContent, $fileExtension);
+    public function __construct(string $file)
+    {
+        $this->content = $this->getContent($file);
+        $this->extension = $this->getExtension($file);
     }
 
     /**
      * @throws Exception
      */
-    public function getContent(string $filePath): string
+    private function getContent(string $filePath): string
     {
         if (file_exists($filePath)) {
             $content = file_get_contents($filePath);

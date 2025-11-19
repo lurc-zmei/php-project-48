@@ -7,7 +7,7 @@
             "Differ\\Differ\\": "src/"
         },
         "files": [
-            "src/helper.php"
+          "src/Helper.php"
         ]
     },
     "bin": [
