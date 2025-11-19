@@ -16,13 +16,15 @@ class Differ
     {
         $fileData1 = new GetData($firstFile);
         $fileData2 = new GetData($secondFile);
+        $parser = new Parser();
+        $formatter = new Formatter();
 
-        $data1 = Parser::parse($fileData1->content, $fileData1->extension);
-        $data2 = Parser::parse($fileData2->content, $fileData2->extension);
+        $data1 = $parser->parse($fileData1->content, $fileData1->extension);
+        $data2 = $parser->parse($fileData2->content, $fileData2->extension);
 
         $diff = $this->buildDiff($data1, $data2);
 
-        return Formatter::format($diff, $format);
+        return $formatter->format($diff, $format);
     }
 
     private function buildDiff(array $data1, array $data2): array

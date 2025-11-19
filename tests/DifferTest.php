@@ -2,6 +2,7 @@
 
 namespace Differ\Differ\tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function Differ\Differ\genDiff;
@@ -10,60 +11,56 @@ class DifferTest extends TestCase
 {
     private string $filePath = __DIR__ . "/fixtures/";
 
-    public function testGenDiffPlain(): void
+    #[DataProvider('formatProvider')]
+    public function testGenDiffPlain(string $format): void
     {
-        $firstFileJson = "{$this->filePath}file1.json";
-        $secondFileJson = "{$this->filePath}file2.json";
-        $firstFileYml = "{$this->filePath}file1.yml";
-        $secondFileYml = "{$this->filePath}file2.yml";
+        $firstFile = "{$this->filePath}file1.{$format}";
+        $secondFile = "{$this->filePath}file2.{$format}";
         $plain = "{$this->filePath}plain-expected";
-
         $expected = file_get_contents($plain);
 
-        $this->assertEquals($expected, genDiff($firstFileJson, $secondFileJson, 'plain'));
-        $this->assertEquals($expected, genDiff($firstFileYml, $secondFileYml, 'plain'));
+        $this->assertEquals($expected, genDiff($firstFile, $secondFile, 'plain'));
     }
 
-    public function testGenDiffJson(): void
+    #[DataProvider('formatProvider')]
+    public function testGenDiffJson(string $format): void
     {
-        $firstFileJson = "{$this->filePath}file1.json";
-        $secondFileJson = "{$this->filePath}file2.json";
-        $firstFileYml = "{$this->filePath}file1.yml";
-        $secondFileYml = "{$this->filePath}file2.yml";
-        $plain = "{$this->filePath}json-expected";
+        $firstFile = "{$this->filePath}file1.{$format}";
+        $secondFile = "{$this->filePath}file2.{$format}";
+        $json = "{$this->filePath}json-expected";
+        $expected = file_get_contents($json);
 
-        $expected = file_get_contents($plain);
-
-        $this->assertEquals($expected, genDiff($firstFileJson, $secondFileJson, 'json'));
-        $this->assertEquals($expected, genDiff($firstFileYml, $secondFileYml, 'json'));
+        $this->assertEquals($expected, genDiff($firstFile, $secondFile, 'json'));
     }
 
-    public function testGenDiffStylish(): void
+    #[DataProvider('formatProvider')]
+    public function testGenDiffStylish(string $format): void
     {
-        $firstFileJson = "{$this->filePath}file1.json";
-        $secondFileJson = "{$this->filePath}file2.json";
-        $firstFileYml = "{$this->filePath}file1.yml";
-        $secondFileYml = "{$this->filePath}file2.yml";
-        $plain = "{$this->filePath}stylish-expected";
+        $firstFile = "{$this->filePath}file1.{$format}";
+        $secondFile = "{$this->filePath}file2.{$format}";
+        $stylish = "{$this->filePath}stylish-expected";
+        $expected = file_get_contents($stylish);
 
-        $expected = file_get_contents($plain);
-
-        $this->assertEquals($expected, genDiff($firstFileJson, $secondFileJson, 'stylish'));
-        $this->assertEquals($expected, genDiff($firstFileYml, $secondFileYml, 'stylish'));
+        $this->assertEquals($expected, genDiff($firstFile, $secondFile, 'stylish'));
     }
 
-    public function testGenDiffDefault(): void
+    #[DataProvider('formatProvider')]
+    public function testGenDiffDefault(string $format): void
     {
-        $firstFileJson = "{$this->filePath}file1.json";
-        $secondFileJson = "{$this->filePath}file2.json";
-        $firstFileYml = "{$this->filePath}file1.yml";
-        $secondFileYml = "{$this->filePath}file2.yml";
-        $plain = "{$this->filePath}stylish-expected";
+        $firstFile = "{$this->filePath}file1.{$format}";
+        $secondFile = "{$this->filePath}file2.{$format}";
+        $stylish = "{$this->filePath}stylish-expected";
+        $expected = file_get_contents($stylish);
 
-        $expected = file_get_contents($plain);
+        $this->assertEquals($expected, genDiff($firstFile, $secondFile));
+    }
 
-        $this->assertEquals($expected, genDiff($firstFileJson, $secondFileJson));
-        $this->assertEquals($expected, genDiff($firstFileYml, $secondFileYml));
+    public static function formatProvider(): array
+    {
+        return [
+            ['json'],
+            ['yaml']
+        ];
     }
     /**
     #[DataProvider('genDiffProvider')]
@@ -85,16 +82,16 @@ class DifferTest extends TestCase
     {
         return [
             ['plain-expected', 'file1.json', 'file2.json', 'plain'],
-            ['plain-expected', 'file1.yml', 'file2.yml', 'plain'],
+            ['plain-expected', 'file1.yaml', 'file2.yaml', 'plain'],
 
             ['json-expected', 'file1.json', 'file2.json', 'json'],
-            ['json-expected', 'file1.yml', 'file2.yml', 'json'],
+            ['json-expected', 'file1.yaml', 'file2.yaml', 'json'],
 
             ['stylish-expected', 'file1.json', 'file2.json', 'stylish'],
-            ['stylish-expected', 'file1.yml', 'file2.yml', 'stylish'],
+            ['stylish-expected', 'file1.yaml', 'file2.yaml', 'stylish'],
 
             ['stylish-expected', 'file1.json', 'file2.json'],
-            ['stylish-expected', 'file1.yml', 'file2.yml'],
+            ['stylish-expected', 'file1.yaml', 'file2.yaml'],
         ];
     }
      * */
