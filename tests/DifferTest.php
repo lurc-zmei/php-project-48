@@ -17,9 +17,8 @@ class DifferTest extends TestCase
         $firstFile = "{$this->filePath}file1.{$format}";
         $secondFile = "{$this->filePath}file2.{$format}";
         $plain = "{$this->filePath}plain-expected";
-        $expected = file_get_contents($plain);
 
-        $this->assertEquals($expected, genDiff($firstFile, $secondFile, 'plain'));
+        $this->assertStringEqualsFile($plain, genDiff($firstFile, $secondFile, 'plain'));
     }
 
     #[DataProvider('formatProvider')]
@@ -28,9 +27,8 @@ class DifferTest extends TestCase
         $firstFile = "{$this->filePath}file1.{$format}";
         $secondFile = "{$this->filePath}file2.{$format}";
         $json = "{$this->filePath}json-expected";
-        $expected = file_get_contents($json);
 
-        $this->assertEquals($expected, genDiff($firstFile, $secondFile, 'json'));
+        $this->assertStringEqualsFile($json, genDiff($firstFile, $secondFile, 'json'));
     }
 
     #[DataProvider('formatProvider')]
@@ -39,9 +37,8 @@ class DifferTest extends TestCase
         $firstFile = "{$this->filePath}file1.{$format}";
         $secondFile = "{$this->filePath}file2.{$format}";
         $stylish = "{$this->filePath}stylish-expected";
-        $expected = file_get_contents($stylish);
 
-        $this->assertEquals($expected, genDiff($firstFile, $secondFile, 'stylish'));
+        $this->assertStringEqualsFile($stylish, genDiff($firstFile, $secondFile, 'stylish'));
     }
 
     #[DataProvider('formatProvider')]
@@ -50,9 +47,8 @@ class DifferTest extends TestCase
         $firstFile = "{$this->filePath}file1.{$format}";
         $secondFile = "{$this->filePath}file2.{$format}";
         $stylish = "{$this->filePath}stylish-expected";
-        $expected = file_get_contents($stylish);
 
-        $this->assertEquals($expected, genDiff($firstFile, $secondFile));
+        $this->assertStringEqualsFile($stylish, genDiff($firstFile, $secondFile));
     }
 
     public static function formatProvider(): array
